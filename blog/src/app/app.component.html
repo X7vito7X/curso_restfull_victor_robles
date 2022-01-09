@@ -1,0 +1,73 @@
+<!-- todos CONTENEDOR PRINCIPAL -->
+<div class="container">
+  <br>
+  <!-- todos BARRA DE NAVEGACION -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="../assets/images/angular.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+      NG-BLOG
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page"[routerLink]="['/inicio']">Inicio</a>
+        </li>
+
+        <li class="nav-item" *ngFor="let category of categories">
+          <a class="nav-link" [routerLink]="['categoria',category.id]">{{category.name}}</a>
+        </li>
+
+      </ul>
+
+      <ul class="navbar-nav navbar-right" *ngIf="!identity.name">
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page"[routerLink]="['/login']">Login</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/register']">Registro</a>
+        </li>
+
+      </ul>
+
+
+
+      <ul class="navbar-nav navbar-right" *ngIf="identity.name && identity.surname">
+        <li *ngIf="identity.image" class="nav-item">
+        <div class="avatar-mask">
+          <img src="{{url + 'users/avatar/' + identity.image}}"  class="avatar-nav"/>
+        </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{identity.name + ' ' + identity.surname}}
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" [routerLink]="['/crear-entrada']">crear entrada</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/crear-categoria']">crear categoria</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" [routerLink]="['/perfil',identity.sub]">Mi perfil</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/ajustes']">Ajustes</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/logout/1']" >Cerrar session</a></li>
+          </ul>
+        </li>
+      </ul>
+
+
+
+
+    </div>
+  </div>
+</nav>
+<!-- Todos CONTENIDO -->
+<router-outlet></router-outlet>
+
+
+
+</div>

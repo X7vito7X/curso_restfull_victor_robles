@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-sm-4" *ngFor="let post of posts">
+    <div class="card" >
+      <div class="card-header">
+        <h5 class="card-title"> <a [routerLink]="['/entrada',post.id]">{{post.title}}</a></h5>
+      </div>
+      <div class="card-body">
+        <div class="post-image" *ngIf="post.image">
+          <img src="{{url + 'post/image/'+post.image}}" class="mw-100" />
+        </div>
+        <div class="post-image" *ngIf="!post.image">
+          <img src="../../../assets/images/imgFl.png" class="mw-100" />
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="posts-buttons mt-3">
+          <a [routerLink]="['/entrada',post.id]" class="btn btn-success ms-2">Leer</a>
+          <span *ngIf="identity.name && identity.sub == post.user_id">
+            <a [routerLink]="['/editar-entrada',post.id]" class="btn btn-warning ms-2">Editar</a>
+
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-danger ms-2" data-bs-toggle="modal" [attr.data-bs-target]="'#test'+post.id" >
+              Borrar
+            </button>
+            <!-- +{{post.id}} [attr.data-target]="'#test'+post.id" data-bs-target="#test"  id="test+{{post.id}}" -->
+            <!-- Modal -->
+            <div class="modal fade" [attr.id]="'test'+post.id"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">¿Seguro quieres borrar el post?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Vas a borrar definitivamente {{post.title}}
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+                    <a (click)="deletePost(post.id)" class="btn btn-danger ms-2" data-bs-dismiss="modal">Borrar</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </span>
+        </div>
+      </div>
+    </div><br>
+  </div>
+</div>
